@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { Colors } from "../constants/colors";
+import { Coolors } from "../constants/colors";
 import { Dimensions } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
@@ -34,14 +34,14 @@ function CardCuenta({ text, children, style, onPress}) {
 const styles = StyleSheet.create({
   card: {
     aspectRatio: 1,
-    backgroundColor: Colors.darkGreen,
+    backgroundColor: Coolors.darkGreen,
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 16,
   },
   textCard: {
-    color: Colors.white,
+    color: Coolors.white,
     fontSize: 20,
     fontWeight: "bold",
     textTransform: "capitalize",

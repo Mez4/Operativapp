@@ -1,4 +1,4 @@
-export const Colors ={
+export const Coolors ={
     lightGray:'#f3f3f4',
     lightGreen:'#4dd687',
     darkGreen:'#337155',

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 //Componentes
-import { Colors } from "../constants/colors";
+import { Coolors } from "../constants/colors";
 import Body from "../components/Body";
 import Button from "../components/Button";
 import CardCuenta from "../components/CardCuenta";
@@ -28,9 +28,31 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
   });
   const [modalVisible, setModalVisible] = useState(false);
   const [textInput, setTextInput] = useState("");
-  const [itemList, setItemList] = useState([]);
+  const [itemList, setItemList] = useState([
+    {
+      value: "Sheccid",
+      empty: false,
+      id: Math.random().toString(),
+    },
+    {
+      value: "Palco 10",
+      empty: false,
+      id: Math.random().toString(),
+    },
+    {
+      value: "Palco 5",
+      empty: false,
+      id: Math.random().toString(),
+    },
+    {
+      value: "palco 7",
+      empty: false,
+      id: Math.random().toString(),
+    },
+  ]);
   if (!loaded) return <AppLoading />;
   const windowWidth = Dimensions.get("window").width;
+  
   const boxWidth = () => {
     let containerWidth = Math.floor(windowWidth - windowWidth * 0.1);
     let box = Math.floor(containerWidth / numColumns());
@@ -44,6 +66,7 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
     setModalVisible(true);
   };
   const closeModal = () => {
+    deleteFakebox()
     setModalVisible(false);
   };
   const handleOnChangeText = (text) => {
@@ -115,7 +138,7 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
                 ></View>
               );
             }
-            return <CardCuenta onPress={()=>{handleOnChangeScreen(item.value)}} text={item.value}/>
+            return <CardCuenta onPress={()=>{handleOnChangeScreen(item)}} text={item.value}/>
           }}
           keyExtractor={(item) => item.id}
         />
@@ -168,7 +191,7 @@ const styles = StyleSheet.create({
   },
   card: {
     aspectRatio: 1,
-    backgroundColor: Colors.darkGreen,
+    backgroundColor: Coolors.darkGreen,
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",
@@ -181,17 +204,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.lightGray,
+    backgroundColor: Coolors.lightGray,
   },
   tittleModal: {
     fontSize: 30,
-    color: Colors.titleCardColor,
+    color: Coolors.titleCardColor,
     fontFamily: "PoppinsBold",
     marginTop: 50,
   },
   paragraphModal: {
     fontSize: 18,
-    color: Colors.textCardColor,
+    color: Coolors.textCardColor,
     width: "60%",
     textAlign: "center",
     lineHeight: 25,

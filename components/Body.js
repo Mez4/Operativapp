@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View} from 'react-native'
-import {Colors} from '../constants/colors';
+import {Coolors} from '../constants/colors';
 
 function Body({style, children,...props}) {
     return(        
@@ -13,7 +13,7 @@ function Body({style, children,...props}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.lightGray, 
+        backgroundColor: Coolors.lightGray, 
         alignItems: 'center',
         justifyContent: 'center',
         width:'100%',

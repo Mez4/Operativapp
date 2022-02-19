@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { StyleSheet, TextInput } from "react-native";
-import { Colors } from "../constants/colors";
+import { Coolors } from "../constants/colors";
 
 function Input({ placeholder, style, value, onChange, ...props }) {
   return (
@@ -9,7 +9,7 @@ function Input({ placeholder, style, value, onChange, ...props }) {
       placeholder={placeholder}
       value={value}
       onChangeText={onChange}
-      placeholderTextColor={Colors.textInput}
+      placeholderTextColor={Coolors.textInput}
       style={{ ...styles.Input, ...style }}
       {...props}
     ></TextInput>
@@ -17,8 +17,8 @@ function Input({ placeholder, style, value, onChange, ...props }) {
 }
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor: Colors.white,
-    color: Colors.black,
+    backgroundColor: Coolors.white,
+    color: Coolors.black,
     width: "90%",
     height: 43,
     paddingLeft: 10,
