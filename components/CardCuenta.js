@@ -19,10 +19,10 @@ const boxWidth = () => {
   }
   return width;
 };
-function CardCuenta({ text, children, style, ...props }) {
+function CardCuenta({ text, children, style, onPress}) {
   return (
     <TouchableOpacity
-      {...props}
+      onPress={onPress}
       style={{ ...styles.card, ...style, height: boxWidth() }}
     >
       {children}

@@ -19,7 +19,6 @@ const handleOnOpenAccount = selectedAccount =>{
   if(accountTag){
     content= <ScreenPedidosCuenta accountTag={accountTag}/>
   }
-
   return (
     <Body>
       {content}

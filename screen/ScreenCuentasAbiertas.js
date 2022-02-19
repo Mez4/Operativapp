@@ -28,28 +28,7 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
   });
   const [modalVisible, setModalVisible] = useState(false);
   const [textInput, setTextInput] = useState("");
-  const [itemList, setItemList] = useState([
-    {
-      id: Math.random().toString(),
-      value: "prueba1",
-      empty: false,
-    },
-    {
-      id: Math.random().toString(),
-      value: "prueba2",
-      empty: false,
-    },
-    {
-      id: Math.random().toString(),
-      value: "prueba3",
-      empty: false,
-    },
-    {
-      id: Math.random().toString(),
-      value: "prueba4",
-      empty: false,
-    },
-  ]);
+  const [itemList, setItemList] = useState([]);
   if (!loaded) return <AppLoading />;
   const windowWidth = Dimensions.get("window").width;
   const boxWidth = () => {
@@ -115,8 +94,7 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
   };
 
   const handleOnSelected = (item) => {
-      onAccountSelected(item)
-      console.log('YA')
+    onAccountSelected(item)     
   }
 
   return (
@@ -137,15 +115,16 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
                 ></View>
               );
             }
-            return <CardCuenta onPress={handleOnSelected(item.value)} text={item.value}></CardCuenta>;
+            return <CardCuenta onPress={handleOnSelected(item.value)} text={item.value}/>
           }}
           keyExtractor={(item) => item.id}
         />
       </View>
-      <Button onPress={handleOnAdd} title={"Nueva cuenta"} />
-
+      <Button onPress={(handleOnAdd)} title={"Nueva cuenta"} />
       {/* -------------------------------------------------------------------------------------------------------- */}
-
+      {/* -------------------------------------------------------------------------------------------------------- */}
+      {/* -------------------------------------------------------------------------------------------------------- */}
+      {/* -------------------------------------------------------------------------------------------------------- */}
       <Modal animationType="slide" visible={modalVisible}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>        
         <View style={styles.modalContainer}>
