@@ -3,8 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
 } from "react-native";
-import ScreenCuentasAbiertas from './screen/ScreenCuentasAbiertas'
-import ScreenPedidosCuenta from './screen/ScreenPedidosCuenta'
+import CuentasAbiertas from './screens/CuentasAbiertas'
+import PedidosCuenta from './screens/PedidosCuenta'
 import Body from "./components/Body";
 
 export default function App() {
@@ -14,11 +14,11 @@ const handleOnOpenAccount = selectedAccount =>{
   setAccountTag(selectedAccount)
 }
 
-  let content = <ScreenCuentasAbiertas onAccountSelected={handleOnOpenAccount}/>
+  let content = <CuentasAbiertas onAccountSelected={handleOnOpenAccount}/>
 
   if(accountTag){
-    content= <ScreenPedidosCuenta accountTag={accountTag}/>
-  }
+    content= <PedidosCuenta accountTag={accountTag}/>
+  } 
   return (
     <Body>
       {content}

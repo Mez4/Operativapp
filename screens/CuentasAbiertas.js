@@ -93,7 +93,7 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
     return columns;
   };
 
-  const handleOnSelected = (item) => {
+  const handleOnChangeScreen = (item)=>{
     onAccountSelected(item)     
   }
 
@@ -115,7 +115,7 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
                 ></View>
               );
             }
-            return <CardCuenta onPress={handleOnSelected(item.value)} text={item.value}/>
+            return <CardCuenta onPress={()=>{handleOnChangeScreen(item.value)}} text={item.value}/>
           }}
           keyExtractor={(item) => item.id}
         />
