@@ -8,18 +8,24 @@ import {
   View,
 } from "react-native";
 
-export default function ScreenPedidosCuenta({accountTag}) {
+export default function PedidosCuenta({navigation}) {
+  const handleOnDashboard=() =>{
+    navigation.navigate('Dashboard')
+  }
+  const handleOnOrdenar=() =>{
+    navigation.navigate('Ordenar')
+  }
   return (
     <Body>
       <CardContent style={{height:350,}}>
-        <Text style={styles.accountName}>{accountTag.value}</Text>
+        <Text style={styles.accountName}>nombre</Text>
         <View style={styles.fakeContainer}></View>
       </CardContent>
       <Text style={styles.total}>
         Total: $1,340.00
       </Text>
-      <Button title={'Nuevo Pedido'} style={styles.buttonBlue}/>
-      <Button title={'listo'} style={styles.buttonGreen}/>
+      <Button title={'Nuevo Pedido'} onPress={handleOnOrdenar} style={styles.buttonBlue}/>
+      <Button title={'listo'}  onPress={handleOnDashboard} style={styles.buttonGreen}/>
       <Button title={'Cerrar cuenta'} style={styles.buttons, styles.buttonRed}/>
     </Body>
 

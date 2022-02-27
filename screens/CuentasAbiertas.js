@@ -21,7 +21,7 @@ import {
 } from "react-native";
 
 
-export default function ScreenCuentasAbiertas({onAccountSelected}) {
+export default function CuentasAbiertas({navigation}) {
   const [loaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
     PoppinsBold: require("../assets/fonts/Poppins-Bold.ttf"),
@@ -53,6 +53,10 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
   if (!loaded) return <AppLoading />;
   const windowWidth = Dimensions.get("window").width;
   
+  const handleOnPress=() =>{
+    navigation.navigate('Cuenta')
+  }
+
   const boxWidth = () => {
     let containerWidth = Math.floor(windowWidth - windowWidth * 0.1);
     let box = Math.floor(containerWidth / numColumns());
@@ -116,9 +120,6 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
     return columns;
   };
 
-  const handleOnChangeScreen = (item)=>{
-    onAccountSelected(item)     
-  }
 
   return (
     <Body>
@@ -138,7 +139,7 @@ export default function ScreenCuentasAbiertas({onAccountSelected}) {
                 ></View>
               );
             }
-            return <CardCuenta onPress={()=>{handleOnChangeScreen(item)}} text={item.value}/>
+            return <CardCuenta onPress={handleOnPress} text={item.value}/>
           }}
           keyExtractor={(item) => item.id}
         />
