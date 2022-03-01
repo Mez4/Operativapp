@@ -1,31 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-//Componentes
+//colores
 import { Coolors } from "../constants/colors";
-import Body from "../components/Body";
-import Button from "../components/Button";
-import CardCuenta from "../components/CardCuenta";
-import Input from "../components/Input";
+//componentes
+import React, { useState } from "react";
+import {Body, Button, CardCuenta, Input,} from "../components/index"
+import {StyleSheet, Text, View, FlatList, Modal, TouchableWithoutFeedback, Keyboard,} from "react-native";
+//funciones
+import { numColumns, boxWidth, deleteFakebox, formatData} from "../components/index"
+//svg
 import CrearCuentasSvg from "../assets/svg/crearCuenta.svg";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Modal,
-  Dimensions,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
 
-
-export default function CuentasAbiertas({navigation}) {
-  const [loaded] = useFonts({
-    Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
-    PoppinsBold: require("../assets/fonts/Poppins-Bold.ttf"),
-  });
+export default function Dashboard({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [textInput, setTextInput] = useState("");
   const [itemList, setItemList] = useState([
@@ -50,22 +34,6 @@ export default function CuentasAbiertas({navigation}) {
       id: Math.random().toString(),
     },
   ]);
-  if (!loaded) return <AppLoading />;
-  const windowWidth = Dimensions.get("window").width;
-  
-  const handleOnPress=() =>{
-    navigation.navigate('Cuenta')
-  }
-
-  const boxWidth = () => {
-    let containerWidth = Math.floor(windowWidth - windowWidth * 0.1);
-    let box = Math.floor(containerWidth / numColumns());
-    let width = Math.floor(box - 10);
-    if (numColumns() > 4) {
-      width = width + 55;
-    }
-    return width;
-  };
   const handleOnAdd = () => {
     setModalVisible(true);
   };
@@ -75,33 +43,6 @@ export default function CuentasAbiertas({navigation}) {
   };
   const handleOnChangeText = (text) => {
     setTextInput(text);
-  };
-  const addFakebox = () => {
-    const cols = numColumns();
-    const fullRows = Math.floor(itemList.length / cols);
-    let ElementsLastRow = itemList.length - fullRows * cols;
-    while (ElementsLastRow !== cols && ElementsLastRow !== 0) {
-      itemList.push({
-        value: "estoy vacio estoy vacio estoy",
-        empty: true,
-        id: Math.random().toString(),
-      });
-      ElementsLastRow = ElementsLastRow + 1;
-    }
-  };
-  const deleteFakebox = () => {
-    while (itemList.some((item) => item.empty === true)) {
-      itemList.forEach(function (item, index, arr) {
-        if (item.empty === true) {
-          itemList.splice(index, 1);
-        }
-      });
-    }
-    addFakebox();
-  };
-  const formatData = (data) => {
-    deleteFakebox();
-    return data;
   };
   const handleConfirmAdd = () => {
     itemList.push({
@@ -113,13 +54,6 @@ export default function CuentasAbiertas({navigation}) {
     setTextInput("");
     setModalVisible(false);
   };
-  const numColumns = () => {
-    let container = Math.floor(windowWidth - windowWidth * 0.1);
-    let columns = Math.floor(container / 117);
-    if (columns > 4) return 4;
-    return columns;
-  };
-
 
   return (
     <Body>
@@ -135,11 +69,14 @@ export default function CuentasAbiertas({navigation}) {
             if (item.empty === true) {
               return (
                 <View
-                  style={[styles.card, styles.fakebox, { height: boxWidth() }]}
+                  style={[styles.card, styles.fakebox, { height: boxWidth(10) }]}
                 ></View>
               );
-            }
-            return <CardCuenta onPress={handleOnPress} text={item.value}/>
+            }''
+            return <CardCuenta 
+                    onPress={() => navigation.navigate('Cuenta', item)} 
+                    text={item.value} 
+                    style={{height: boxWidth(10)}}/>
           }}
           keyExtractor={(item) => item.id}
         />

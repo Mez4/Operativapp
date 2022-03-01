@@ -12,11 +12,11 @@ function CardContent({style, children,...props}) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Coolors.white, 
         borderRadius:25,
         width:'90%',
         padding:25,
-
+        marginBottom:15,
+        backgroundColor:Coolors.white,
       },
 })
 

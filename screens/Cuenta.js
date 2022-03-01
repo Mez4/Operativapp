@@ -1,24 +1,22 @@
-import CardContent from "../components/CardContent";
-import Button from "../components/Button";
-import Body from "../components/Body";
+import React from "react";
+//colores
 import { Coolors } from "../constants/colors";
-import {
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+//componentes
+import {Body, Button, CardContent} from "../components/index"
+import {StyleSheet, Text, View,} from "react-native";
 
-export default function PedidosCuenta({navigation}) {
+export default function Cuenta({navigation, route}) {
   const handleOnDashboard=() =>{
     navigation.navigate('Dashboard')
   }
   const handleOnOrdenar=() =>{
     navigation.navigate('Ordenar')
   }
+
   return (
     <Body>
-      <CardContent style={{height:350,}}>
-        <Text style={styles.accountName}>nombre</Text>
+      <CardContent style={{height:350}}>
+        <Text style={styles.accountName}>{route.params.value}</Text>
         <View style={styles.fakeContainer}></View>
       </CardContent>
       <Text style={styles.total}>

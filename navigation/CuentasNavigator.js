@@ -1,23 +1,39 @@
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import CuentasAbiertas from "../screens/CuentasAbiertas"
-import PedidosCuenta from "../screens/PedidosCuenta"
-import AgregarProductos from '../screens/AgregarProducto'
+import Dashboard from "../screens/Dashboard";
+import Cuenta from "../screens/Cuenta";
+import Ordenar from "../screens/Ordenar";
+import Menu from "../screens/Menu";
+import Productos from "../screens/Productos";
 
-const Stack = createNativeStackNavigator();
+const StackCuenta = createNativeStackNavigator();
 
-function CuentasNavigator(){
-    return(
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name='Dashboard' component={CuentasAbiertas}/>
-                <Stack.Screen name='Cuenta' component={PedidosCuenta}/>
-                <Stack.Screen name='Ordenar' component={AgregarProductos}/>
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+function CuentasNavigator() {
+  return (
+    <NavigationContainer>
+      <StackCuenta.Navigator>
+        <StackCuenta.Screen
+          name="Dashboard"
+          component={Dashboard}
+          options={{ headerShown: false }}
+        />
+        <StackCuenta.Screen
+          name="Cuenta"
+          component={Cuenta}
+          options={{ headerShown: false }}
+        />
+        <StackCuenta.Screen
+          name="Ordenar"
+          component={Ordenar}
+          options={{ headerShown: false }}
+        />
+      </StackCuenta.Navigator>
+    </NavigationContainer>
+  );
 }
 
 export default CuentasNavigator
+

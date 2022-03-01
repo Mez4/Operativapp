@@ -21,6 +21,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-44.0.0.tar.gz",
+    "react-native-gesture-handler": "^2.3.0",
+    "react-native-reanimated": "^2.4.1",
     "react-native-rotate-view": "^1.1.1",
     "react-native-safe-area-context": "^4.0.1",
     "react-native-screens": "^3.12.0",
