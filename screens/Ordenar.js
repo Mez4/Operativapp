@@ -34,11 +34,15 @@ import { numColumns, boxWidth,} from "../components/index"
         empty: false,
         id: Math.random().toString(),
       },]
+      const sortCategorias = (a,b) => {
+        return a.value.localeCompare(b.value);
+      }
+      let categoriasOrden = categorias.sort(sortCategorias)
     return (
     <Body>
         <CardContent>
         <FlatList
-          data={categorias}
+          data={categoriasOrden}
           style={styles.flatList}
           contentContainerStyle={{ flexGrow: 1 }}
           columnWrapperStyle={{ justifyContent: "space-between" }}

@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor:Coolors.red,
   },
   accountName:{
+    textTransform:"capitalize",
     alignSelf:"flex-end",
     fontSize:25,
     fontFamily:'PoppinsBold',

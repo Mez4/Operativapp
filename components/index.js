@@ -18,35 +18,7 @@ export const boxWidth = (numb) => {
   return width;
 };
 
-export const addFakebox = () => {
-  const cols = numColumns();
-  const fullRows = Math.floor(arr.length / cols);
-  let ElementsLastRow = arr.length - fullRows * cols;
-  while (ElementsLastRow !== cols && ElementsLastRow !== 0) {
-    arr.push({
-      value: "",
-      empty: true,
-      id: Math.random().toString(),
-    });
-    ElementsLastRow = ElementsLastRow + 1;
-  }
-};
 
-export const deleteFakebox = (arr) => {
-  while (arr.some((item) => item.empty === true)) {
-    arr.forEach(function (item, index, arr) {
-      if (item.empty === true) {
-        arr.splice(index, 1);
-      }
-    });
-  }
-  addFakebox(arr);
-};
-
-export const formatData = (data) => {
-  deleteFakebox(data);
-  return data;
-};
 export {default as CardContent} from "../components/CardContent";
 export { default as Body } from "../components/Body";
 export {default as Button} from "../components/Button";

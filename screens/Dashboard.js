@@ -54,6 +54,34 @@ export default function Dashboard({navigation}) {
     setTextInput("");
     setModalVisible(false);
   };
+  const addFakebox = () => {
+    const cols = numColumns();
+    const fullRows = Math.floor(itemList.length / cols);
+    let ElementsLastRow = itemList.length - fullRows * cols;
+    while (ElementsLastRow !== cols && ElementsLastRow !== 0) {
+      itemList.push({
+        value: "",
+        empty: true,
+        id: Math.random().toString(),
+      });
+      ElementsLastRow = ElementsLastRow + 1;
+    }
+  }; 
+  const deleteFakebox = () => {
+    while (itemList.some((item) => item.empty === true)) {
+      itemList.forEach(function (item, index, itemList) {
+        if (item.empty === true) {
+          itemList.splice(index, 1);
+        }
+      });
+    }
+    addFakebox(itemList);
+  };
+
+  const formatData = (data) => {
+    deleteFakebox(data);
+    return data;
+  };
 
   return (
     <Body>
