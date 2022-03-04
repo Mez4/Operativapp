@@ -6,6 +6,7 @@ import CuentasNavigator from "./navigation/CuentasNavigator";
 import "react-native-gesture-handler"
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import MainNavigator from "./navigation/index";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -14,7 +15,7 @@ export default function App() {
   });
   if (!loaded) return <AppLoading />;
   return (
-      <CuentasNavigator/>
+      <MainNavigator/>
   );
 }
 //////////

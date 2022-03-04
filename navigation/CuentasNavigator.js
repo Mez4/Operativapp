@@ -1,20 +1,15 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Dashboard from "../screens/Dashboard";
 import Cuenta from "../screens/Cuenta";
 import Ordenar from "../screens/Ordenar";
-import Menu from "../screens/Menu";
-import Productos from "../screens/Productos";
 
 const StackCuenta = createNativeStackNavigator();
 
 function CuentasNavigator() {
   return (
-    <NavigationContainer>
-      <StackCuenta.Navigator>
+      <StackCuenta.Navigator initialRouteName="Dashboard">
         <StackCuenta.Screen
           name="Dashboard"
           component={Dashboard}
@@ -31,7 +26,6 @@ function CuentasNavigator() {
           options={{ headerShown: false }}
         />
       </StackCuenta.Navigator>
-    </NavigationContainer>
   );
 }
 

@@ -1,15 +1,15 @@
 //colores
+import React from "react";
 import { Coolors } from "../constants/colors";
 //componentes
-import {Body} from "../components/index"
-import {StyleSheet, Text} from "react-native";
+import { Body } from "../components/index";
+import { StyleSheet, Text } from "react-native";
 
-export default function Productos({navigation}) {
+export default function Productos({ navigation }) {
   return (
     <Body>
-        <Text>menu</Text>
+      <Text>Productos</Text>
     </Body>
-
   );
 }
 //////////
