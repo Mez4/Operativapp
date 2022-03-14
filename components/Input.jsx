@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontFamily: "PoppinsBold",
     borderRadius: 5,
-    marginBottom: 50,
-    marginTop:30,
     fontSize: 17,
   },
 });

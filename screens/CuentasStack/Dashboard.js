@@ -1,13 +1,13 @@
 //colores
-import { Coolors } from "../constants/colors";
+import { Coolors } from "../../constants/colors";
 //componentes
 import React, { useState } from "react";
-import {Body, Button, CardCuenta, Input,} from "../components/index"
+import {Body, Button, CardCuenta, Input, Title, TextDescription} from "../../components/index"
 import {StyleSheet, Text, View, FlatList, Modal, TouchableWithoutFeedback, Keyboard,} from "react-native";
 //funciones
-import { numColumns, boxWidth, deleteFakebox, formatData} from "../components/index"
+import { numColumns, boxWidth, deleteFakebox, formatData} from "../../components/index"
 //svg
-import CrearCuentasSvg from "../assets/svg/crearCuenta.svg";
+import CrearCuentasSvg from "../../assets/svg/crearCuenta.svg";
 
 export default function Dashboard({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -117,15 +117,17 @@ export default function Dashboard({navigation}) {
       <Modal animationType="slide" visible={modalVisible}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>        
         <View style={styles.modalContainer}>
-          <Text style={styles.tittleModal}>Crear cuenta</Text>
-          <Text style={styles.paragraphModal}>
-            Registra los datos de tu cliente para poder atenderlo.
-          </Text>
+          <Title text={'Crear cuenta'}/>
+          <TextDescription 
+          style={styles.paragraphModal}
+          text={"Registra los datos de tu cliente para poder atenderlo."}
+          />
           <CrearCuentasSvg style={styles.image} width={"60%"} height={"30%"} />
           <Input
             placeholder={"nombre del cliente"}
             value={textInput}
             onChangeText={handleOnChangeText}
+            style={styles.inputNombre}
           />
           <Button
             onPress={handleConfirmAdd}
@@ -172,25 +174,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Coolors.lightGray,
   },
-  tittleModal: {
-    fontSize: 30,
-    color: Coolors.titleCardColor,
-    fontFamily: "PoppinsBold",
-    marginTop: 50,
-  },
+  
   paragraphModal: {
-    fontSize: 18,
-    color: Coolors.textCardColor,
     width: "60%",
-    textAlign: "center",
     lineHeight: 25,
-    fontFamily: "Poppins",
     marginBottom: 10,
   },
   closeModal: {
     width: 45,
     backgroundColor: "#ccc",
     margin: 0,
+  },
+  inputNombre:{
+    marginBottom:30,
+    marginTop:70,
   },
   buttonAdd: {
     marginBottom: 20,

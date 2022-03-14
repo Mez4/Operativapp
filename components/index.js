@@ -24,3 +24,6 @@ export { default as Body } from "../components/Body";
 export {default as Button} from "../components/Button";
 export {default as CardCuenta} from "../components/CardCuenta";
 export {default as Input} from "../components/Input";
+export {default as Title} from "../components/Title"
+export {default as NameApp} from "../components/NameApp"
+export {default as TextDescription} from "../components/TextDescription"

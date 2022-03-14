@@ -1,8 +1,8 @@
 import React from "react";
 //colores
-import { Coolors } from "../constants/colors";
+import { Coolors } from "../../constants/colors";
 //componentes
-import {Body, Button, CardContent} from "../components/index"
+import {Body, Button, CardContent} from "../../components/index"
 import {StyleSheet, Text, View,} from "react-native";
 
 export default function Cuenta({navigation, route}) {
@@ -24,7 +24,7 @@ export default function Cuenta({navigation, route}) {
       </Text>
       <Button title={'Nuevo Pedido'} onPress={handleOnOrdenar} style={styles.buttonBlue}/>
       <Button title={'listo'}  onPress={handleOnDashboard} style={styles.buttonGreen}/>
-      <Button title={'Cerrar cuenta'} style={styles.buttons, styles.buttonRed}/>
+      <Button title={'Cerrar cuenta'} style={styles.buttonRed}/>
     </Body>
 
   );
@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     marginLeft:'7%',
     marginVertical:15,
   },
+  buttonRed:{
+    backgroundColor:Coolors.red,
+  },
   buttonBlue:{
     backgroundColor:Coolors.blue,
     marginBottom:15,    
@@ -46,9 +49,6 @@ const styles = StyleSheet.create({
   buttonGreen:{
     backgroundColor:Coolors.lightGreen,
     marginBottom:15,
-  },
-  buttonRed:{
-    backgroundColor:Coolors.red,
   },
   accountName:{
     textTransform:"capitalize",

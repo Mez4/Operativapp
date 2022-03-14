@@ -1,9 +1,9 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Dashboard from "../screens/Dashboard";
-import Cuenta from "../screens/Cuenta";
-import Ordenar from "../screens/Ordenar";
+import Dashboard from "../screens/CuentasStack/Dashboard";
+import Cuenta from "../screens/CuentasStack/Cuenta";
+import Ordenar from "../screens/CuentasStack/Ordenar";
 
 const StackCuenta = createNativeStackNavigator();
 

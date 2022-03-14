@@ -1,11 +1,11 @@
 import React from "react";
 //colores
-import { Coolors } from "../constants/colors";
+import { Coolors } from "../../constants/colors";
 //componentes
 import { StyleSheet, Text, FlatList} from "react-native";
-import {Body, Button, CardCuenta, CardContent} from "../components/index"
+import {Body, Button, CardCuenta, CardContent} from "../../components/index"
 //funciones
-import { numColumns, boxWidth,} from "../components/index"
+import { numColumns, boxWidth,} from "../../components/index"
 
   export default function Ordenar({navigation}) {
     const categorias = [

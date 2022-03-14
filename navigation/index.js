@@ -1,11 +1,12 @@
 import React from 'react'
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native'
-import DrawerNavigator from './DrawerNavigator'
+import { NavigationContainer } from '@react-navigation/native';
+import RegistroNavigator from './RegistroNavigator';
+
 function MainNavigator(){
     return(
         <NavigationContainer>
-            <DrawerNavigator/>
+            <RegistroNavigator/>
         </NavigationContainer>
     )
 }
