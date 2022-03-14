@@ -3,13 +3,16 @@ import React from "react";
 import { Coolors } from "../../constants/colors";
 //componentes
 import { Body, Button, Input, Title, TextDescription } from "../../components/index";
-import { StyleSheet, Text } from "react-native";
+import {StyleSheet, TouchableWithoutFeedback, Keyboard } from "react-native";
+
 
 export default function Registro({ navigation }) {
   return (
     <Body>
+      <TouchableWithoutFeedback style={{flex:1, width:'100%', height:'100%',}} onPress={Keyboard.dismiss}>
+      <Body>
       <Title text={'¡Bienvenido!'}/>
-      <TextDescription text={"comenzar con el registro"}/>
+      <TextDescription style={{marginBottom:25,}}text={"registra tus datos para comenzar"}/>
       <Input style={styles.input} placeholder={'ingresa tu nombre'}/>
       <Input style={styles.input} placeholder={'ingresa tu apellido'}/>
       <Input style={styles.input} placeholder={'ingresa tus email'}/>
@@ -19,6 +22,8 @@ export default function Registro({ navigation }) {
         title={"Listo"}
         onPress={() => navigation.navigate("LoginScreen")}
       />
+      </Body>
+      </TouchableWithoutFeedback>
     </Body>
   );
 }

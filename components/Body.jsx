@@ -1,11 +1,13 @@
 import React from 'react'
 import { StyleSheet, View} from 'react-native'
+import { StatusBar } from "expo-status-bar";
 import {Coolors} from '../constants/colors';
 
 function Body({style, children,...props}) {
     return(        
         <View {...props}style={{...styles.container, ...style}}>
             {children}
+            <StatusBar style="auto"/>
         </View>  
     )
 }
