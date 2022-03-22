@@ -4,7 +4,6 @@ import "react-native-gesture-handler"
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import MainNavigator from "./navigation/index";
-
 export default function App() {
   LogBox.ignoreLogs(['Setting a timer for a long period of time'])
   const [loaded] = useFonts({

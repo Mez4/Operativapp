@@ -12,6 +12,7 @@ function CardContent({style, children,...props}) {
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         borderRadius:25,
         width:'90%',
         padding:25,

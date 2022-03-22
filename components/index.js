@@ -28,3 +28,4 @@ export {default as Title} from "../components/Title";
 export {default as NameApp} from "../components/NameApp";
 export {default as TextDescription} from "../components/TextDescription";
 export {default as DiscretButton} from "../components/DiscretButton";
+export {default as If} from "../components/If"

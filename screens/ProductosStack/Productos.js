@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Coolors } from "../../constants/colors";
 import { db } from "../../constants/Database";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot, getDocs,query } from "firebase/firestore";
 //componentes
 import {
   Body,
@@ -11,11 +11,18 @@ import {
   Input,
   CardContent,
 } from "../../components/index";
-import { View, StyleSheet, Text, FlatList, Modal } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
 export default function Productos({ navigation }) {
   const [data, setData] = useState();
-  
+  const [rtData, setRTData] = useState([]);
+
   async function loadData() {
     try {
       const productos = await getDocs(collection(db, "productos"));
@@ -24,36 +31,50 @@ export default function Productos({ navigation }) {
       console.log(e);
     }
   }
+
+  async function loadRTData(){
+    const q = query(collection(db,"productos"))
+    const suscriber = onSnapshot(q,(querySnapshot) =>{
+      const productos =[]
+      querySnapshot.forEach(documentSnapshot => {
+        productos.push({
+          ...documentSnapshot.data(),
+          key: documentSnapshot.id
+        })
+      });
+      setRTData(productos)
+    })
+    return() => suscriber()
+  }
+
   useEffect(() => {
     loadData();
+    loadRTData();
   }, []);
 
   function renderItem({ item }) {
     return (
-      <View style={styles.listItem}>
-        <Text style={styles.itemText}>{item.data().PRODUCTO}</Text>
-        <Text style={styles.itemText}>${item.data().PRECIO}</Text>
-        <Text style={styles.itemText}>{item.data().GRUPO}</Text>
-        <Text style={styles.itemText}>{item.data().AREA}</Text>
-        <View style={styles.buttonContainer}>
-          <Button title={"editar"} style={styles.button} />
-          <Button title={"borrar"} style={styles.button} />
-        </View>
-      </View>
+      <TouchableOpacity style={styles.listItem}>
+        <Text style={[styles.itemText, {width:'31%',}]}>{item.PRODUCTO}</Text>
+        <Text style={[styles.itemText, {width:'20%',}]}>${item.PRECIO}</Text>
+        <Text style={[styles.itemText, {width:'25%',}]}>{item.GRUPO}</Text>
+        <Text style={[styles.itemText, {width:'24%',}]}>{item.AREA}</Text>
+      </TouchableOpacity>
     );
   }
 
   return (
     <Body>
-      <CardContent>
+      <CardContent style={{ maxHeight: "80%", padding: 15 }}>
         <FlatList
-          data={data}
+          data={rtData}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.key}
         />
       </CardContent>
       <DiscretButton
         title={"Agregar producto"}
+        style={{ marginVertical: 30 }}
         onPress={() => navigation.navigate("AgregarProducto")}
       />
     </Body>
@@ -61,26 +82,20 @@ export default function Productos({ navigation }) {
 }
 //////////
 const styles = StyleSheet.create({
-  button: {
-    width: 45,
-    backgroundColor: "#ccc",
-  },
   listItem: {
     flexDirection: "row",
     justifyContent: "space-between",
+
+    alignItems: "center",
+    borderBottomColor: Coolors.lightGray,
+    borderBottomWidth: 1,
+    height:40,
   },
   itemText: {
     color: Coolors.black,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Poppins",
     textTransform: "capitalize",
     textAlign: "center",
-    width: "21%",
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    backgroundColor: "red",
-    width: "15%",
-    justifyContent: "space-between",
   },
 });
