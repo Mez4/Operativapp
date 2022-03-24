@@ -15,7 +15,7 @@ export default function Cuenta({navigation, route}) {
 
   return (
     <Body>
-      <CardContent style={{height:350}}>
+      <CardContent style={{maxHeight:'50%'}}>
         <Text style={styles.accountName}>{route.params.value}</Text>
         <View style={styles.fakeContainer}></View>
       </CardContent>

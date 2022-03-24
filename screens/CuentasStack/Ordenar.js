@@ -4,16 +4,20 @@ import { collection, getDocs } from "firebase/firestore";
 //colores
 import { Coolors } from "../../constants/colors";
 //componentes
-import { StyleSheet, Text, FlatList } from "react-native";
+import { StyleSheet, Text, FlatList, View } from "react-native";
 import {
   Body,
   Button,
   CardCuenta,
   CardContent,
   If,
+  ItemList,
+  TextDescription,
+  Contador,
 } from "../../components/index";
 //funciones
 import { numColumns, boxWidth } from "../../components/index";
+import { set } from "react-native-reanimated";
 
 export default function Ordenar({ navigation }) {
   const [ShowCards, setShowCards] = useState(true);
@@ -21,6 +25,9 @@ export default function Ordenar({ navigation }) {
   const [grupos, setGrupos] = useState([]);
   const [productos, setProductos] = useState([]);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
+  const [productoSelected, setProductoSelected] = useState();
+  const [Pedido, setPedido] = useState([]);
+
   async function loadData() {
     try {
       const grupos = await getDocs(collection(db, "grupos"));
@@ -39,23 +46,29 @@ export default function Ordenar({ navigation }) {
     return a.data().NOMBRE.localeCompare(b.data().NOMBRE);
   };
   let categoriasOrden = grupos.sort(sortCategorias);
-  let nomasLoQues = categoriasOrden.map(function Datos(element) {
-    return element.data().NOMBRE;
-  });
   const handleOpenProducts = (item) => {
     setShowCards(false);
     sEtShowProducts(true);
-    console.log(item.data().NOMBRE);
     const filterProducts = productos.filter(function filtro(element) {
-      if (item.data().NOMBRE === element.data().GRUPO) {
+      if (
+        item.data().NOMBRE === element.data().GRUPO &&
+        element.data().AREA === "PALCOS"
+      ) {
         return true;
       } else {
         return false;
       }
     });
-    setProductosFiltrados(filterProducts)
+    setProductosFiltrados(filterProducts);
   };
-
+  const handleSelectProduct = (item) => {
+    setProductoSelected(item);
+    Pedido.push(item);
+  };
+  const log = () => {
+    console.log(Pedido);
+    console.log(Contador)
+  };
   const handleCloseProducts = () => {
     sEtShowProducts(false);
     setShowCards(true);
@@ -85,30 +98,50 @@ export default function Ordenar({ navigation }) {
           />
         </If>
         <If show={ShowProducts}>
+          <View style={styles.headerProducts}>
+            <TextDescription text={"Producto"} />
+            <TextDescription text={"Precio"} />
+          </View>
           <FlatList
-            contentContainerStyle={{ flexGrow: 1 }}
-            columnWrapperStyle={{ justifyContent: "space-between" }}
             data={productosFiltrados}
-            style={styles.flatList}
-            horizontal={false}
-            numColumns={numColumns()}
             renderItem={({ item }) => {
               return (
-                <CardCuenta
-                  text={item.data().PRODUCTO}
-                  style={{ height: boxWidth(20) }}
-                  styleText={styles.cardText}
-                  onPress={() => handleOpenProducts(item)}
+                <ItemList
+                  col1={item.data().PRODUCTO}
+                  col2={"$" + item.data().PRECIO}
+                  onPress={() => handleSelectProduct(item)}
                 />
               );
             }}
             keyExtractor={(item) => item.id}
           />
-          <Button title={"regresar"} onPress={handleCloseProducts} />
+          <Button
+            style={styles.ButtonRegresar}
+            title={"regresar"}
+            onPress={handleCloseProducts}
+          />
         </If>
       </CardContent>
-      <CardContent style={{ maxHeight: "20%" }}></CardContent>
-      <Button title={"Enviar pedido"} />
+      <CardContent style={{ maxHeight: "20%" }}>
+        <FlatList
+          data={Pedido}
+          extraData={Pedido}
+          renderItem={({ item }) => {
+            return (
+
+              <View style={styles.ItemPedidoContainer}>
+                <Text style={styles.ItemPedidoText}>
+                  {item.data().PRODUCTO}
+                </Text>
+                <Contador/>
+              </View>
+            );
+          }}
+          keyExtractor={(item) => item.id}
+        />
+      </CardContent>
+      <Button title={"Enviar pedido"} onPress={log} />
+      {/*() => navigation.navigate("Dashboard")*/}
     </Body>
   );
 }
@@ -132,5 +165,26 @@ const styles = StyleSheet.create({
   },
   fakebox: {
     backgroundColor: "transparent",
+  },
+  headerProducts: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  ButtonRegresar: {
+    marginTop: 25,
+    alignSelf: "center",
+    backgroundColor: Coolors.orage,
+  },
+  ItemPedidoContainer: {
+    flexDirection:"row",
+    marginBottom:5,
+    alignItems:"center",
+    justifyContent:"space-between",
+  },
+  ItemPedidoText: {
+    fontFamily: "PoppinsBold",
+    textTransform: "capitalize",
+    fontSize:18,
+    marginHorizontal:15,
   },
 });

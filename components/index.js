@@ -29,3 +29,5 @@ export {default as NameApp} from "../components/NameApp";
 export {default as TextDescription} from "../components/TextDescription";
 export {default as DiscretButton} from "../components/DiscretButton";
 export {default as If} from "../components/If"
+export {default as Contador} from "../components/Contador"
+export {default as ItemList} from "../components/ItemList"
