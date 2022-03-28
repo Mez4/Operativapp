@@ -1,25 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Coolors } from "../constants/colors";
-import { Button } from "../components/Button";
-import { useState } from "react";
-
-function Contador({ onPressLess, ...props }) {
-  const [Cantidad, setCantidad] = useState(1);
-  const resta = () => {
-    setCantidad(Cantidad - 1);
+import { Coolors } from "../constants/colors";                  
+import CounterReducer from "../store/reducers/counter.reducer";
+function Contador({ item, ...props }) {
+  const resta = (item) => {           
+    dispatch({type:"@counter/decremented"})
   };
-  const suma = () => {
-    setCantidad(Cantidad + 1);
+  const suma = (item) => {
+    dispatch({type:"@counter/incremented"})
   };
-
   return (
     <View style={styles.ContadorButtonContainer}>
-      <TouchableOpacity onPress={resta} style={styles.button}>
+      <TouchableOpacity onPress={()=> resta(item)} style={styles.button}>
         <Text style={styles.buttonTittle}>-</Text>
       </TouchableOpacity>
-      <Text style={styles.ContadorText}>{Cantidad}</Text>
-      <TouchableOpacity onPress={suma} style={styles.button}>
+      <Text style={styles.ContadorText}>{counter}</Text>
+      <TouchableOpacity onPress={()=> suma(item)} style={styles.button}>
         <Text style={styles.buttonTittle}>+</Text>
       </TouchableOpacity>
     </View>

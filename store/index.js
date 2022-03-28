@@ -1,5 +1,7 @@
+import { createStore, combineReducers } from "redux";
+import CounterReducer from "./reducers/counter.reducer";
+
 const RootReducer = combineReducers({
-  categories: CategoryReducer,
-  products: ProductReducer,
+  counter: CounterReducer,
 });
 export default createStore(RootReducer);

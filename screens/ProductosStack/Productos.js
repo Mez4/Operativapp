@@ -52,8 +52,8 @@ export default function Productos({ navigation }) {
   }
 
   useEffect(() => {
-    loadData();
-    loadRTData();
+    loadRTData()
+    setTimeout(()=> loadData(), 1000)
   }, []);
 
   const sortProductos = (a, b) => {

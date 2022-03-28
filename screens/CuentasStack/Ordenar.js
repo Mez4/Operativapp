@@ -18,6 +18,7 @@ import {
 //funciones
 import { numColumns, boxWidth } from "../../components/index";
 import { set } from "react-native-reanimated";
+import store from "../../store";
 
 export default function Ordenar({ navigation }) {
   const [ShowCards, setShowCards] = useState(true);
@@ -66,8 +67,8 @@ export default function Ordenar({ navigation }) {
     Pedido.push(item);
   };
   const log = () => {
-    console.log(Pedido);
-    console.log(Contador)
+    console.log(Pedido.map(item=>item.data().PRODUCTO))
+    console.log(Contador.counter)
   };
   const handleCloseProducts = () => {
     sEtShowProducts(false);
@@ -127,13 +128,15 @@ export default function Ordenar({ navigation }) {
           data={Pedido}
           extraData={Pedido}
           renderItem={({ item }) => {
-            return (
+            if(item.id){
 
+            }
+            return (
               <View style={styles.ItemPedidoContainer}>
                 <Text style={styles.ItemPedidoText}>
                   {item.data().PRODUCTO}
                 </Text>
-                <Contador/>
+                <Contador item={item}/>
               </View>
             );
           }}
