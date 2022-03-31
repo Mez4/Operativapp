@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "../screens/CuentasStack/Dashboard";
 import Cuenta from "../screens/CuentasStack/Cuenta";
 import Ordenar from "../screens/CuentasStack/Ordenar";
+import CerrarCuenta from  "../screens/CuentasStack/CerrarCuenta";
 
 const StackCuenta = createNativeStackNavigator();
 
@@ -23,6 +24,11 @@ function CuentasNavigator() {
         <StackCuenta.Screen
           name="Ordenar"
           component={Ordenar}
+          options={{ headerShown: false }}
+        />
+        <StackCuenta.Screen
+          name="Cerrar"
+          component={CerrarCuenta}
           options={{ headerShown: false }}
         />
       </StackCuenta.Navigator>

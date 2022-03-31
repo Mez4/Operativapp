@@ -143,8 +143,8 @@ export default function Ordenar({ navigation }) {
           keyExtractor={(item) => item.id}
         />
       </CardContent>
-      <Button title={"Enviar pedido"} onPress={log} />
-      {/*() => navigation.navigate("Dashboard")*/}
+      <Button title={"Enviar pedido"} onPress={() => navigation.navigate("Dashboard")} />
+      {/*() => navigation.navigate("Dashboard") log*/}
     </Body>
   );
 }

@@ -12,7 +12,9 @@ export default function Cuenta({navigation, route}) {
   const handleOnOrdenar=() =>{
     navigation.navigate('Ordenar')
   }
-
+  const handleOnCerrarCuenta=() =>{
+    navigation.navigate('Cerrar')
+  }
   return (
     <Body>
       <CardContent style={{maxHeight:'50%'}}>
@@ -24,7 +26,7 @@ export default function Cuenta({navigation, route}) {
       </Text>
       <Button title={'Nuevo Pedido'} onPress={handleOnOrdenar} style={styles.buttonBlue}/>
       <Button title={'listo'}  onPress={handleOnDashboard} style={styles.buttonGreen}/>
-      <Button title={'Cerrar cuenta'} style={styles.buttonRed}/>
+      <Button title={'Cerrar cuenta'} onPress={handleOnCerrarCuenta} style={styles.buttonRed}/>
     </Body>
 
   );
