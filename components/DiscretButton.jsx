@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet, Text,  TouchableOpacity} from 'react-native'
 import { Coolors } from '../constants/colors'
 
-function DiscretButton({onPress, title, style}) {
+function DiscretButton({onPress, title, style,styleText}) {
     return(        
         <TouchableOpacity 
         onPress={onPress} 
         style={{...styles.button, ...style}}>
-            <Text style={styles.buttonTittle}>{title}</Text>
+            <Text style={{...styles.buttonTittle, ...styleText}}>{title}</Text>
         </TouchableOpacity>  
 
     )

@@ -8,6 +8,7 @@ import {
   CardContent,
   Input,
   Title,
+  DiscretButton,
 } from "../../components/index";
 import {
   StyleSheet,
@@ -15,7 +16,9 @@ import {
   View,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
+import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 export default function CerrarCuenta({ navigation, route }) {
   const total = 4000;
@@ -28,29 +31,54 @@ export default function CerrarCuenta({ navigation, route }) {
     setTextInput(text);
   };
   const handleOnSetEfectivo = (text) => {
-    setTextEfectivo(
-      parseFloat(parseFloat(textEfectivo) + parseFloat(textInput))
-    );
-    setTextInput();
-    setTextSaldo(textSaldo - textInput);
+    if (Number.isNaN(parseFloat(textInput)) === true|| textInput === undefined) {
+      Alert.alert("Cantidad invalida", "agrega una cantidad.");
+    } else {
+      setTextEfectivo(
+        parseFloat(parseFloat(textEfectivo) + parseFloat(textInput))
+      );
+      setTextInput();
+      setTextSaldo(textSaldo - textInput);
+    }
+    console.log(typeof(textInput))
+    console.log(textInput)
   };
   const handleOnSetTdc = (text) => {
-    setTextTdc(parseFloat(parseFloat(textTdc) + parseFloat(textInput)));
-    setTextInput();
-    setTextSaldo(textSaldo - textInput);
+    if (Number.isNaN(parseFloat(textInput)) === true|| textInput === undefined) {
+      Alert.alert("Cantidad invalida", "agrega una cantidad.");
+    } else {
+      setTextTdc(
+        parseFloat(parseFloat(textTdc) + parseFloat(textInput))
+      );
+      setTextInput();
+      setTextSaldo(textSaldo - textInput);
+    }
   };
   const handleOnSetCortesia = (text) => {
-    setTextCortesia(
-      parseFloat(parseFloat(textCortesia) + parseFloat(textInput))
-    );
-    setTextInput();
-    setTextSaldo(textSaldo - textInput);
+    if (Number.isNaN(parseFloat(textInput)) === true|| textInput === undefined) {
+      Alert.alert("Cantidad invalida", "agrega una cantidad.");
+    } else {
+      setTextCortesia(
+        parseFloat(parseFloat(textCortesia) + parseFloat(textInput))
+      );
+      setTextInput();
+      setTextSaldo(textSaldo - textInput);
+    }
   };
   const moneyFormat = (numb) => {
     let format = numb.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
     return format;
   };
-
+  const handleOnListo = () => {
+    if (textSaldo != 0) {
+      Alert.alert(
+        "Saldo insuficiente",
+        "No puedes cerrar una cuenta sin saldar."
+      );
+    } else {
+      navigation.navigate("Dashboard");
+    }
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Body>
@@ -108,9 +136,12 @@ export default function CerrarCuenta({ navigation, route }) {
             />
           </View>
         </CardContent>
-        <Button
-          title={"Listo"}
-          onPress={() => navigation.navigate("Dashboard")}
+        <Button title={"Listo"} onPress={handleOnListo} />
+        <DiscretButton
+          title={"Regresar"}
+          onPress={() => navigation.goBack()}
+          style={{ marginTop: 30 }}
+          styleText={{ color: Coolors.textInput }}
         />
       </Body>
     </TouchableWithoutFeedback>
@@ -122,7 +153,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "90%",
-    marginBottom:15,
+    marginBottom: 15,
   },
   buttonBlue: {
     backgroundColor: Coolors.blue,
@@ -143,7 +174,7 @@ const styles = StyleSheet.create({
   },
   saldoText: {
     width: "50%",
-    marginBottom:10,
+    marginBottom: 10,
   },
   saldoTextRed: {
     width: "50%",

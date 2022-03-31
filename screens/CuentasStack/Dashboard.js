@@ -18,6 +18,7 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 //funciones
 import {
@@ -65,14 +66,19 @@ export default function Dashboard({ navigation }) {
     setTextInput(text);
   };
   const handleConfirmAdd = () => {
-    itemList.push({
-      id: Math.random().toString(),
-      value: textInput,
-      empty: false,
-    });
-    formatData();
-    setTextInput("");
-    setModalVisible(false);
+    if(textInput === ''){
+      Alert.alert('Nombre del cliente','Agrega un nombre a la cuenta para continuar.')
+    }
+    else{
+      itemList.push({
+        id: Math.random().toString(),
+        value: textInput,
+        empty: false,
+      });
+      formatData();
+      setTextInput("");
+      setModalVisible(false);
+    }
   };
   const addFakebox = () => {
     const cols = numColumns();
