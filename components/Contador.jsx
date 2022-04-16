@@ -1,21 +1,32 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Coolors } from "../constants/colors";                  
-import CounterReducer from "../store/reducers/counter.reducer";
+import { Coolors } from "../constants/colors";
+import store from "../store";
+import { suma, resta, addItem } from "../store/actions/action.counters";
 function Contador({ item, ...props }) {
-  const resta = (item) => {           
-    dispatch({type:"@counter/decremented"})
-  };
-  const suma = (item) => {
-    dispatch({type:"@counter/incremented"})
-  };
+  
+  const isindex = (item) => {
+    const arr =  store.getState().counter
+   const index =  arr.findIndex(function(e){
+      return e.id === item.id
+    })
+    return index
+  }  
+  const increment = (item) => {
+    store.dispatch(suma(item))
+  }
+  const decrement = (item) => {
+    store.dispatch(resta(item))
+  }
   return (
     <View style={styles.ContadorButtonContainer}>
-      <TouchableOpacity onPress={()=> resta(item)} style={styles.button}>
+      <TouchableOpacity onPress={() => decrement(item)} style={styles.button}>
         <Text style={styles.buttonTittle}>-</Text>
       </TouchableOpacity>
-      <Text style={styles.ContadorText}>{counter}</Text>
-      <TouchableOpacity onPress={()=> suma(item)} style={styles.button}>
+      <Text style={styles.ContadorText}>
+        {store.getState().counter[isindex(item)].value}
+      </Text>
+      <TouchableOpacity onPress={() => increment(item)} style={styles.button}>
         <Text style={styles.buttonTittle}>+</Text>
       </TouchableOpacity>
     </View>

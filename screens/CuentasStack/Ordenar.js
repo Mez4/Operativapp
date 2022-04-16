@@ -17,8 +17,8 @@ import {
 } from "../../components/index";
 //funciones
 import { numColumns, boxWidth } from "../../components/index";
-import { set } from "react-native-reanimated";
 import store from "../../store";
+import { addItem } from "../../store/actions/action.counters";
 
 export default function Ordenar({ navigation }) {
   const [ShowCards, setShowCards] = useState(true);
@@ -63,13 +63,19 @@ export default function Ordenar({ navigation }) {
     setProductosFiltrados(filterProducts);
   };
   const handleSelectProduct = (item) => {
-    setProductoSelected(item);
-    Pedido.push(item);
+    if(Pedido.includes(item)){
+      console.log('ya esta')
+    }
+    else{
+      setProductoSelected(item);
+      Pedido.push(item);
+      console.log('no estaba')
+      store.dispatch(addItem(item))
+    }
   };
   const log = () => {
-    console.log(Pedido.map(item=>item.data().PRODUCTO))
-    console.log(Contador.counter)
-  };
+    console.log(store.getState().counter)
+  }
   const handleCloseProducts = () => {
     sEtShowProducts(false);
     setShowCards(true);
@@ -129,7 +135,6 @@ export default function Ordenar({ navigation }) {
           extraData={Pedido}
           renderItem={({ item }) => {
             if(item.id){
-
             }
             return (
               <View style={styles.ItemPedidoContainer}>
@@ -143,7 +148,7 @@ export default function Ordenar({ navigation }) {
           keyExtractor={(item) => item.id}
         />
       </CardContent>
-      <Button title={"Enviar pedido"} onPress={() => navigation.navigate("Dashboard")} />
+      <Button title={"Enviar pedido"} onPress={() => log()} />
       {/*() => navigation.navigate("Dashboard") log*/}
     </Body>
   );
