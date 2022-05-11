@@ -18,7 +18,7 @@ import {
 //funciones
 import { numColumns, boxWidth } from "../../components/index";
 import store from "../../store";
-import { addItem } from "../../store/actions/action.counters";
+import { addItem,suma } from "../../store/actions/action.counters";
 
 export default function Ordenar({ navigation }) {
   const [ShowCards, setShowCards] = useState(true);
@@ -64,17 +64,16 @@ export default function Ordenar({ navigation }) {
   };
   const handleSelectProduct = (item) => {
     if(Pedido.includes(item)){
-      console.log('ya esta')
+      store.dispatch(suma(item))
     }
     else{
       setProductoSelected(item);
       Pedido.push(item);
-      console.log('no estaba')
       store.dispatch(addItem(item))
     }
   };
   const log = () => {
-    console.log(store.getState().counter)
+    console.log(store.getState())
   }
   const handleCloseProducts = () => {
     sEtShowProducts(false);

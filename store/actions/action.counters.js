@@ -5,14 +5,14 @@ export const ADD = "@counter/addItem";
 export const suma = (item) => {
   return {
     type: "@counter/incremented",
-    item: item,
+    item: {id:item.id, value:1},
 
   };
 };
 export const resta = (item) => {
   return {
     type: "@counter/decremented",
-    item: item, 
+    item: {id:item.id, value:1}, 
   };
 };
 export const addItem = (item) => {

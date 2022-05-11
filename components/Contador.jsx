@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Coolors } from "../constants/colors";
 import store from "../store";
 import { suma, resta, addItem } from "../store/actions/action.counters";
 function Contador({ item, ...props }) {
-  
+  const [ignored, forceUpdate] = useReducer(x => x+1,0)
   const isindex = (item) => {
     const arr =  store.getState().counter
    const index =  arr.findIndex(function(e){
@@ -18,6 +18,9 @@ function Contador({ item, ...props }) {
   const decrement = (item) => {
     store.dispatch(resta(item))
   }
+  store.subscribe(()=>{
+    forceUpdate()
+  })
   return (
     <View style={styles.ContadorButtonContainer}>
       <TouchableOpacity onPress={() => decrement(item)} style={styles.button}>
